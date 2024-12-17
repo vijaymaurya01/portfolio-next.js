@@ -1,5 +1,14 @@
 import "@/styles/globals.css";
+import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import '@mantine/core/styles.css';
 
-export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function MyApp({ Component, pageProps }) {
+  return (
+    <MantineProvider defaultColorScheme="dark">
+      <ColorSchemeScript defaultColorScheme="dark" />
+      <Component {...pageProps} />
+    </MantineProvider>
+  );
 }
+
+export default MyApp;

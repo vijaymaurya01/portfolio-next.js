@@ -3,19 +3,72 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background-start: 220 20% 97%;
+  --background-end: 220 16% 92%;
+  --foreground: 220 20% 10%;
+  --accent-1: 340 82% 52%;
+  --accent-2: 160 84% 39%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background-start: 240 30% 10%;
+  --background-end: 240 23% 19%;
+  --foreground: 0 0% 100%;
+  --accent-1: 326 100% 74%;
+  --accent-2: 150 100% 50%;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  color: hsl(var(--foreground));
+  background: linear-gradient(to bottom right, hsl(var(--background-start)), hsl(var(--background-end)));
 }
+
+/* Prism.js customization */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6c7a89;
+}
+
+.token.punctuation {
+  color: #f8f8f2;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol {
+  color: hsl(var(--accent-1));
+}
+
+.token.boolean,
+.token.number {
+  color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  color: hsl(var(--accent-2));
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #f8f8f2;
+}
+
+.token.function {
+  color: hsl(var(--accent-1));
+}
+
+.token.keyword {
+  color: #66d9ef;
+}
+
