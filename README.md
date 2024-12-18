@@ -1,40 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# **Portfolio Project**
 
-## Getting Started
+This is a modern and responsive portfolio website built with **Next.js** and animated with **GSAP**. It showcases sections like banners, blogs, skills, education, experience, and projects.
 
-First, run the development server:
+<img width="1470" alt="image" src="https://github.com/user-attachments/assets/264bc1ce-1c3d-4d7d-9720-9371ba057627" />
+
+---
+
+## **Table of Contents**
+
+- [**Portfolio Project**](#portfolio-project)
+  - [**Table of Contents**](#table-of-contents)
+  - [**Overview**](#overview)
+  - [**Features**](#features)
+  - [**Technologies Used**](#technologies-used)
+  - [**Folder Structure**](#folder-structure)
+  - [**Getting Started**](#getting-started)
+
+---
+
+## **Overview**
+
+This portfolio website helps showcase your projects, skills, and experience interactively. It includes various components like a blog card, contact form, typewriter animation, and dark/light theme support.
+
+---
+
+## **Features**
+
+- **Modern UI/UX**: Clean and responsive design.  
+- **Light and Dark Mode**: Theme toggle for user preference.  
+- **GSAP Animations**: Smooth entrance animations for better interactivity.  
+- **Reusable Components**: Modular and clean code structure.  
+- **Blog Cards**: Interactive cards for the latest blog posts.  
+- **Contact Form**: Basic form for communication.  
+
+---
+
+## **Technologies Used**
+
+- **Next.js** - React framework for server-side rendering.  
+- **Tailwind CSS** - For styling and responsive design.  
+- **GSAP** - For animations.  
+- **Firebase** - For backend services and hosting.  
+
+---
+
+## **Folder Structure**
+
+Here is the project directory structure:
+```
+test-app/
+│
+├── .next/                 # Next.js build output
+├── node_modules/          # Dependencies
+├── public/                # Static files
+├── src/
+│   ├── components/        # Reusable components
+│   │   ├── BannerComponent.jsx
+│   │   ├── BlogCard.jsx
+│   │   ├── ContactForm.jsx
+│   │   ├── EducationComponent.jsx
+│   │   ├── ExperienceComponent.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── ProjectCard.jsx
+│   │   ├── SkillsComponent.jsx
+│   │   ├── TypewriterText.jsx
+│   │
+│   ├── lib/               # Utility files
+│   ├── pages/             # Next.js routing
+│   │   ├── api/           # API routes
+│   │   ├── _app.js        # Main app component
+│   │   ├── _document.js   # Custom document file
+│   │   └── index.js       # Homepage
+│   │
+│   ├── styles/            # CSS or Tailwind styles
+│
+├── .gitignore             # Files to ignore in version control
+├── firebase.json          # Firebase configuration
+├── .firebaserc            # Firebase project configuration
+└── README.md              # Project documentation
+
+```
+
+---
+
+## **Getting Started**
+
+Follow these steps to set up the project locally:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/portfolio-project.git
+    ```
+2. Navigate to the Project Directory
+
+```bash
+cd test-app
+```
+
+3. Install Dependencies
+
+```bash
+npm install
+```
+
+4. How to Run
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The project will be available at:
+http://localhost:3000
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## **Contributing**
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Contributions are welcome! Please fork this repository and create a pull request with your changes.
