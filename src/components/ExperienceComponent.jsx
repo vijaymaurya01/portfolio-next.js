@@ -1,91 +1,116 @@
-import React from 'react';
-import { Briefcase, Calendar, ExternalLink } from 'lucide-react';
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import { gsap } from 'gsap'
+import { Briefcase, Calendar, ExternalLink, ChevronDown } from 'lucide-react'
 
 const experiences = [
     {
-        title: "Senior Full Stack Developer",
-        company: "E-commerce Solutions Inc.",
-        period: "2020 - Present",
-        description: "Led the development of a high-performance e-commerce platform serving over 1 million users. Implemented microservices architecture and optimized database queries, resulting in a 40% improvement in page load times.",
+        title: "Software Development & Testing Engineer (SDTE)",
+        company: "Xenonstack Pvt Ltd",
+        period: "2022 - Present",
+        description: "Working as a Software Developer and Tester, contributing to both development and quality assurance for AI-driven solutions.",
         projects: [
             {
-                name: "EKart",
-                description: "A full-featured online marketplace with real-time inventory management and personalized product recommendations.",
-                technologies: ["React", "Node.js", "MongoDB", "Redis", "AWS"]
-            }
-        ]
+                name: "TYP",
+                description: "A platform similar to Ekart with advanced inventory and order management systems. Focused on optimizing the user experience and ensuring end-to-end testing.",
+                technologies: ["React", "Node.js", "MongoDB", "AWS"],
+            },
+            {
+                name: "Computer Vision (AI Agent)",
+                description: "Developed an AI-based monitoring system to detect theft and abnormal activity in stores. Worked on both development and rigorous testing to ensure reliability.",
+                technologies: ["Python", "OpenCV", "TensorFlow", "AWS"],
+            },
+            {
+                name: "AWS News Recommendation",
+                description: "An AI-powered news recommendation engine that delivers personalized news based on user interests. Contributed to system architecture and testing.",
+                technologies: ["Python", "AWS SageMaker", "React", "MongoDB"],
+            },
+        ],
     },
-    {
-        title: "Computer Vision Engineer",
-        company: "AI Innovations Ltd.",
-        period: "2018 - 2020",
-        description: "Developed and deployed computer vision algorithms for autonomous vehicles, focusing on object detection and scene understanding. Collaborated with cross-functional teams to integrate CV systems with vehicle control modules.",
-        projects: [
-            {
-                name: "AutoVision",
-                description: "An advanced computer vision system for autonomous vehicles, capable of real-time object detection and tracking in various weather conditions.",
-                technologies: ["Python", "TensorFlow", "OpenCV", "CUDA", "ROS"]
-            }
-        ]
-    },
-    {
-        title: "Full Stack Developer",
-        company: "CRM Solutions Co.",
-        period: "2016 - 2018",
-        description: "Designed and implemented custom CRM solutions for small to medium-sized businesses. Focused on creating intuitive user interfaces and robust backend systems to streamline customer management processes.",
-        projects: [
-            {
-                name: "SmartCRM",
-                description: "A customizable CRM platform with advanced analytics and automation features, improving client engagement rates by 25%.",
-                technologies: ["Angular", "Express.js", "PostgreSQL", "Docker", "Azure"]
-            }
-        ]
-    }
-];
+]
 
-const ExperienceComponent = ({ theme }) => {
+const ExperienceComponent = () => {
+    const [activeProject, setActiveProject] = useState(null)
+
+    useEffect(() => {
+        gsap.fromTo(
+            '.experience-card',
+            { opacity: 0, y: 50 },
+            { opacity: 1, y: 0, duration: 0.8, stagger: 0.3, ease: 'power3.out' }
+        )
+    }, [])
+
+    const toggleProject = (projectName) => {
+        setActiveProject(activeProject === projectName ? null : projectName)
+    }
+
     return (
-        <section id="experience" className={`py-16 ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-3xl font-bold mb-8 text-center">Professional Experience</h2>
-                <div className="space-y-12">
+        <section id="experience" className="py-16 ">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Professional Experience</h2>
+                <div className="space-y-8">
                     {experiences.map((exp, index) => (
-                        <div key={index} className={`p-6 rounded-lg shadow-lg ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-                            <div className="flex items-center mb-4">
-                                <Briefcase className={`mr-2 ${theme === 'dark' ? 'text-[#00FF9D]' : 'text-green-600'}`} size={24} />
-                                <h3 className="text-xl font-semibold">{exp.title}</h3>
-                            </div>
-                            <p className={`text-lg mb-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{exp.company}</p>
-                            <div className="flex items-center mb-4">
-                                <Calendar className={`mr-2 ${theme === 'dark' ? 'text-[#FF26B9]' : 'text-pink-600'}`} size={18} />
-                                <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{exp.period}</p>
-                            </div>
-                            <p className={`mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{exp.description}</p>
-                            <div className="mt-4">
-                                <h4 className="text-lg font-semibold mb-2">Key Projects:</h4>
-                                {exp.projects.map((project, pIndex) => (
-                                    <div key={pIndex} className={`mt-2 p-4 rounded ${theme === 'dark' ? 'bg-gray-700' : 'bg-gray-100'}`}>
-                                        <h5 className="text-md font-semibold flex items-center">
-                                            <ExternalLink className={`mr-2 ${theme === 'dark' ? 'text-[#00FF9D]' : 'text-green-600'}`} size={16} />
-                                            {project.name}
-                                        </h5>
-                                        <p className={`mt-1 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{project.description}</p>
-                                        <div className="mt-2 flex flex-wrap gap-2">
-                                            {project.technologies.map((tech, tIndex) => (
-                                                <span key={tIndex} className={`text-xs px-2 py-1 rounded ${theme === 'dark' ? 'bg-gray-600 text-gray-300' : 'bg-gray-200 text-gray-700'}`}>
-                                                    {tech}
-                                                </span>
+                        <div key={index} className="experience-card  rounded-lg shadow-lg overflow-hidden">
+                            <div className="p-6">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="flex items-center space-x-2">
+                                        <Briefcase className="text-green-600 " size={24} />
+                                        <h3 className="text-xl font-semibold ">{exp.title}</h3>
+                                    </div>
+                                    <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-green-800 dark:bg-green-900 dark:text-blue-200 rounded-full">
+                                        {exp.company}
+                                    </span>
+                                </div>
+                                <div className="flex items-center mb-4 text-pink-600 ">
+                                    <Calendar className="mr-2" size={18} />
+                                    <span>{exp.period}</span>
+                                </div>
+                                <p className="mb-6 ">{exp.description}</p>
+                                <div className="space-y-4">
+                                    <button
+                                        onClick={() => toggleProject('all')}
+                                        className="flex items-center justify-between w-full px-4 py-2 text-left   rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                                    >
+                                        <span className="font-medium">Key Projects</span>
+                                        <ChevronDown
+                                            className={`transform transition-transform ${activeProject === 'all' ? 'rotate-180' : ''
+                                                }`}
+                                            size={20}
+                                        />
+                                    </button>
+                                    {activeProject === 'all' && (
+                                        <div className="mt-4 space-y-4">
+                                            {exp.projects.map((project, pIndex) => (
+                                                <div key={pIndex} className=" rounded-lg p-4">
+                                                    <h4 className="text-lg font-medium mb-2 flex items-center ">
+                                                        <ExternalLink className="mr-2 text-green-600 dark:text-blue-400" size={16} />
+                                                        {project.name}
+                                                    </h4>
+                                                    <p className="text-sm  mb-3">{project.description}</p>
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {project.technologies.map((tech, tIndex) => (
+                                                            <span
+                                                                key={tIndex}
+                                                                className="px-2 py-1 text-xs font-medium  rounded"
+                                                            >
+                                                                {tech}
+                                                            </span>
+                                                        ))}
+                                                    </div>
+                                                </div>
                                             ))}
                                         </div>
-                                    </div>
-                                ))}
+                                    )}
+                                </div>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default ExperienceComponent;
+export default ExperienceComponent
+

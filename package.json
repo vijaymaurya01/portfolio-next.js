@@ -12,12 +12,18 @@
     "@mantine/core": "^7.15.1",
     "@mantine/hooks": "^7.15.1",
     "@types/prismjs": "^1.26.5",
+    "framer-motion": "^11.15.0",
+    "fs": "^0.0.1-security",
+    "gsap": "^3.12.5",
     "lucide-react": "^0.468.0",
     "next": "15.1.0",
     "prismjs": "^1.29.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-icons": "^5.4.0"
+    "react-hook-form": "^7.54.1",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.4.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "postcss": "^8",

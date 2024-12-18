@@ -34,7 +34,7 @@ const posts = [
 export default function BlogCard() {
 
     return (
-        <section className="py-32">
+        <section className="py-10">
             <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                 <div className="space-y-5 sm:text-center sm:max-w-md sm:mx-auto">
                     <h1 className="text-3xl font-extrabold sm:text-4xl dark:text-slate-100">Latest blog posts</h1>
@@ -49,10 +49,10 @@ export default function BlogCard() {
                                     <img src={items.img} loading="lazy" alt={items.title} className="w-full rounded-lg" />
                                     <div className="mt-3 space-y-2">
                                         <span className="block text-green-600 text-sm">{items.date}</span>
-                                        <h3 className="text-lg text-green-600 duration-150 group-hover:text-white font-semibold">
+                                        <h3 className="text-lg text-green-600 duration-150 group-hover:text-pink-500 font-semibold">
                                             {items.title}
                                         </h3>
-                                        <p className=" text-sm duration-150 group-hover:text-green-600">{items.desc}</p>
+                                        <p className=" text-sm duration-150 group-hover:text-gray-600">{items.desc}</p>
                                     </div>
                                 </a>
                             </li>

@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Home, UserCircle, BriefcaseBusiness, Brain, Backpack, FileText, Layers, Menu, X, Sun, Moon } from 'lucide-react'
+import { Home, UserCircle, BriefcaseBusiness, Brain, Backpack, FileText, Layers, Menu, X, Sun, Moon, Mail } from 'lucide-react'
+import { gsap } from 'gsap'
 import { cn } from '@/lib/utils'
 
 const navItems = [
-    
     { label: 'About', icon: <UserCircle size={18} />, href: '#about' },
     { label: 'Skills', icon: <Brain size={18} />, href: '#skills' },
     { label: 'Experience', icon: <BriefcaseBusiness size={18} />, href: '#experience' },
@@ -18,6 +18,7 @@ export default function Navbar({ theme, toggleTheme }) {
     const [isOpen, setIsOpen] = useState(false)
     const [activeSection, setActiveSection] = useState('')
 
+    // Detecting which section is currently visible on scroll
     useEffect(() => {
         const handleScroll = () => {
             const sections = navItems.map(item => item.href.slice(1))
@@ -36,6 +37,15 @@ export default function Navbar({ theme, toggleTheme }) {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    // GSAP animation for navigation items
+    useEffect(() => {
+        gsap.fromTo(
+            '.nav-item',
+            { opacity: 0, x: -50 },
+            { opacity: 1, x: 0, duration: 0.5, stagger: 0.1 }
+        )
+    }, [])
+
     const handleItemClick = (href) => {
         setIsOpen(false)
         const element = document.querySelector(href)
@@ -49,7 +59,7 @@ export default function Navbar({ theme, toggleTheme }) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
-                        <a href="#" className="text-xl font-bold">Logo</a>
+                        <a href="#" className="text-xl font-bold">Vijay</a>
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
@@ -62,9 +72,9 @@ export default function Navbar({ theme, toggleTheme }) {
                                         handleItemClick(item.href)
                                     }}
                                     className={cn(
-                                        "flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ease-in-out",
+                                        "nav-item flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ease-in-out",
                                         activeSection === item.href.slice(1)
-                                            ? theme === 'dark' ? "bg-gray-700 text-white" : "bg-gray-200 text-gray-900"
+                                            ? theme === 'dark' ? "bg-green-500 text-black" : "bg-green-400 text-gray-900"
                                             : theme === 'dark' ? "text-gray-300 hover:bg-gray-700 hover:text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
                                     )}
                                 >
@@ -72,6 +82,21 @@ export default function Navbar({ theme, toggleTheme }) {
                                     <span className="ml-2">{item.label}</span>
                                 </a>
                             ))}
+                            {/* Contact button with animation */}
+                            <a
+                                href="#contact"
+                                className={cn(
+                                    "nav-item flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ease-in-out",
+                                    theme === 'dark' ? "text-gray-300 hover:bg-gray-700 hover:text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                                )}
+                                onClick={(e) => {
+                                    e.preventDefault()
+                                    handleItemClick('#contact')
+                                }}
+                            >
+                                <Mail size={18} />
+                                <span className="ml-2">Contact</span>
+                            </a>
                         </div>
                     </div>
                     <div className="flex items-center">
@@ -108,7 +133,7 @@ export default function Navbar({ theme, toggleTheme }) {
                                 handleItemClick(item.href)
                             }}
                             className={cn(
-                                "flex items-center px-3 py-2 rounded-md text-base font-medium",
+                                "nav-item flex items-center px-3 py-2 rounded-md text-base font-medium",
                                 activeSection === item.href.slice(1)
                                     ? theme === 'dark' ? "bg-gray-700 text-white" : "bg-gray-200 text-gray-900"
                                     : theme === 'dark' ? "text-gray-300 hover:bg-gray-700 hover:text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
@@ -118,9 +143,23 @@ export default function Navbar({ theme, toggleTheme }) {
                             <span className="ml-2">{item.label}</span>
                         </a>
                     ))}
+                    {/* Mobile Contact Button */}
+                    <a
+                        href="#contact"
+                        className={cn(
+                            "nav-item flex items-center px-3 py-2 rounded-md text-base font-medium",
+                            theme === 'dark' ? "text-gray-300 hover:bg-gray-700 hover:text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        )}
+                        onClick={(e) => {
+                            e.preventDefault()
+                            handleItemClick('#contact')
+                        }}
+                    >
+                        <Mail size={18} />
+                        <span className="ml-2">Contact</span>
+                    </a>
                 </div>
             </div>
         </nav>
     )
 }
-
