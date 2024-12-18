@@ -41,15 +41,15 @@ const ProjectCard = ({ title, description, imageUrl, technologies, theme }) => {
     return (
         <section>
 {/*  className={`py-16 ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`} */}
-            <div className="project-card max-w-sm rounded overflow-hidden shadow-lg dark:bg-gray-500">
+            <div className="project-card max-w-sm rounded overflow-hidden shadow-lg d">
                 <Image src={imageUrl} alt={title} width={400} height={200} className="w-full" />
                 <div className="px-6 py-4">
                     <div className="font-bold text-xl mb-2">{title}</div>
-                    <p className="text-base text-gray-700">{description}</p>
+                    <p className="text-base text-gray-500">{description}</p>
                 </div>
                 <div className="px-6 pt-4 pb-2">
                     {technologies.map((tech, index) => (
-                        <span key={index} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                        <span key={index} className="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
                             {tech}
                         </span>
                     ))}

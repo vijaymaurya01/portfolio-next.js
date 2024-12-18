@@ -1,4 +1,6 @@
-import Image from 'next/image'
+import React, { useEffect } from 'react';
+import Image from 'next/image';
+import { gsap } from 'gsap';
 
 const posts = [
     {
@@ -32,19 +34,29 @@ const posts = [
 ]
 
 export default function BlogCard() {
+    useEffect(() => {
+        // GSAP animations for card entry
+        gsap.from(".blog-card", {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+    }, []);
 
     return (
         <section className="py-10">
             <div className="max-w-screen-xl mx-auto px-4 md:px-8">
                 <div className="space-y-5 sm:text-center sm:max-w-md sm:mx-auto">
-                    <h1 className="text-3xl font-extrabold sm:text-4xl dark:text-slate-100">Latest blog posts</h1>
-                    <p className="dark:text-slate-100">Blogs that are loved by the community. Updated every hour.</p>
+                    <h1 className="text-3xl font-extrabold sm:text-4xl">Latest blog posts</h1>
+                    <p className="">Blogs that are loved by the community. Updated every hour.</p>
                     
                 </div>
                 <ul className="grid gap-x-8 gap-y-10 mt-16 sm:grid-cols-2 lg:grid-cols-3">
                     {
                         posts.map((items, key) => (
-                            <li className="w-full mx-auto group sm:max-w-sm" key={key}>
+                            <li className=" blog-card w-full mx-auto group sm:max-w-sm" key={key}>
                                 <a href={items.href}>
                                     <img src={items.img} loading="lazy" alt={items.title} className="w-full rounded-lg" />
                                     <div className="mt-3 space-y-2">

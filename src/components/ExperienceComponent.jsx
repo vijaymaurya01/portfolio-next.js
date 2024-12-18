@@ -48,7 +48,7 @@ const ExperienceComponent = () => {
     return (
         <section id="experience" className="py-16 ">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 dark:text-white">Professional Experience</h2>
+                <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 ">Professional Experience</h2>
                 <div className="space-y-8">
                     {experiences.map((exp, index) => (
                         <div key={index} className="experience-card  rounded-lg shadow-lg overflow-hidden">
