@@ -6,13 +6,13 @@ const projects = [
     {
         title: 'TecTracks',
         description: 'A blog website where users can post and read blogs. Built with Next.js for the frontend, Firebase for authentication, database, and hosting.',
-        imageUrl: '/tectracks-image.jpg', // Replace with actual image path
+        imageUrl: '/tectracks-image.png', // Replace with actual image path
         technologies: ['Next.js', 'Firebase', 'Express' , 'GCP'],
     },
     {
         title: 'TYP',
         description: 'A platform similar to Ekart with advanced inventory and order management systems. Focused on optimizing user experience and end-to-end testing.',
-        imageUrl: '/tectracks-image.jpg', // Replace with actual image path
+        imageUrl: '/typ.png', // Replace with actual image path
         technologies: ['Next.js', 'GO', 'Postgress', 'AWS', 'Cloudwatch'],
     },
     {
