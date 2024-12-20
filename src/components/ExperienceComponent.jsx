@@ -92,7 +92,7 @@ const ExperienceComponent = () => {
                                                         {project.technologies.map((tech, tIndex) => (
                                                             <span
                                                                 key={tIndex}
-                                                                className="px-2 py-1 text-xs font-medium  rounded"
+                                                                className="inline-block bg-green-200 dark:bg-green-700 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-200 mr-2 mb-2"
                                                             >
                                                                 {tech}
                                                             </span>

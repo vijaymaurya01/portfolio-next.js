@@ -7,13 +7,13 @@ const projects = [
         title: 'TecTracks',
         description: 'A blog website where users can post and read blogs. Built with Next.js for the frontend, Firebase for authentication, database, and hosting.',
         imageUrl: '/tectracks-image.png', // Replace with actual image path
-        technologies: ['Next.js', 'Firebase', 'Express' , 'GCP'],
+        technologies: ['Next.js', 'Firebase', 'Express', 'GCP'],
     },
     {
         title: 'TYP',
         description: 'A platform similar to Ekart with advanced inventory and order management systems. Focused on optimizing user experience and end-to-end testing.',
         imageUrl: '/typ.png', // Replace with actual image path
-        technologies: ['Next.js', 'GO', 'Postgress', 'AWS', 'Cloudwatch'],
+        technologies: ['Next.js', 'GO', 'Postgres', 'AWS', 'Cloudwatch'],
     },
     {
         title: 'Computer Vision (AI Agent)',
@@ -25,7 +25,7 @@ const projects = [
         title: 'AWS News Recommendation',
         description: 'An AI-powered news recommendation engine that delivers personalized news based on user interests. Contributed to system architecture and testing.',
         imageUrl: '/aws-news-image.png', // Replace with actual image path
-        technologies: ['Next.js', 'Postgress', 'GO', 'AWS', 'OpenAI'],
+        technologies: ['Next.js', 'Postgres', 'GO', 'AWS', 'OpenAI'],
     },
 ];
 
@@ -39,43 +39,69 @@ const ProjectCard = ({ title, description, imageUrl, technologies, theme }) => {
     }, []);
 
     return (
-        <section>
-{/*  className={`py-16 ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`} */}
-            <div className="project-card max-w-sm rounded overflow-hidden shadow-lg d">
-                <Image src={imageUrl} alt={title} width={400} height={200} className="w-full" />
-                <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">{title}</div>
-                    <p className="text-base text-gray-500">{description}</p>
-                </div>
-                <div className="px-6 pt-4 pb-2">
-                    {technologies.map((tech, index) => (
-                        <span key={index} className="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                            {tech}
-                        </span>
+        <div
+            className={`project-card max-w-sm rounded-lg overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 ${
+                theme === 'dark' ? 'bg-gray-800 text-white' : 'bg-gray-100 text-gray-900'
+            }`}
+        >
+            <Image
+                src={imageUrl}
+                alt={title}
+                width={400}
+                height={200}
+                className="w-full object-cover rounded-t-lg"
+            />
+            <div className="px-6 py-4">
+                <h3 className="font-bold text-xl mb-2">{title}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-300">{description}</p>
+            </div>
+            <div className="px-6 pt-4 pb-2">
+                {technologies.map((tech, index) => (
+                    <span
+                        key={index}
+                        className="inline-block bg-green-200 dark:bg-green-700 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-200 mr-2 mb-2"
+                    >
+                        {tech}
+                    </span>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+const ProjectsSection = ({ theme = 'light' }) => {
+    useEffect(() => {
+        gsap.fromTo(
+            '.projects-section',
+            { opacity: 0 },
+            { opacity: 1, duration: 1, ease: 'power3.out' }
+        );
+    }, []);
+
+    return (
+        <section
+            id="projects"
+            className={`projects-section py-16 ${
+                theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'
+            }`}
+        >
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+               
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {projects.map((project, index) => (
+                        <ProjectCard
+                            key={index}
+                            title={project.title}
+                            description={project.description}
+                            imageUrl={project.imageUrl}
+                            technologies={project.technologies}
+                            theme={theme}
+                        />
                     ))}
                 </div>
             </div>
         </section>
-        );
+    );
 };
-
-const ProjectsSection = () => (
-    <section id="projects" className="py-4 ">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-           
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {projects.map((project, index) => (
-                    <ProjectCard
-                        key={index}
-                        title={project.title}
-                        description={project.description}
-                        imageUrl={project.imageUrl}
-                        technologies={project.technologies}
-                    />
-                ))}
-            </div>
-        </div>
-    </section>
-);
 
 export default ProjectsSection;
