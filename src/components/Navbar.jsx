@@ -11,7 +11,8 @@ const navItems = [
     { label: 'Experience', icon: <BriefcaseBusiness size={18} />, href: '#experience' },
     { label: 'Education', icon: <Backpack size={18} />, href: '#education' },
     { label: 'Blogs', icon: <FileText size={18} />, href: '#blogs' },
-    { label: 'Projects', icon: <Layers size={18} />, href: '#projects' }
+    { label: 'Projects', icon: <Layers size={18} />, href: '#projects' },
+    { label: 'Contact', icon: <Mail size={18} />, href: '#contact' }
 ]
 
 export default function Navbar({ theme, toggleTheme }) {
@@ -59,7 +60,7 @@ export default function Navbar({ theme, toggleTheme }) {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
-                        <a href="#" className="text-xl font-bold">Vijay</a>
+                        <a href="" className="text-2xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">VIJAY</a>
                     </div>
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-4">
@@ -75,28 +76,13 @@ export default function Navbar({ theme, toggleTheme }) {
                                         "nav-item flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ease-in-out",
                                         activeSection === item.href.slice(1)
                                             ? theme === 'dark' ? "bg-green-500 text-black" : "bg-green-400 text-gray-900"
-                                            : theme === 'dark' ? "text-gray-300 hover:bg-gray-700 hover:text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                                    )}
+                                           : theme === 'dark' ? "text-gray-300 hover:bg-gray-700 hover:text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900")}
                                 >
                                     {item.icon}
                                     <span className="ml-2">{item.label}</span>
                                 </a>
                             ))}
                             {/* Contact button with animation */}
-                            <a
-                                href="#contact"
-                                className={cn(
-                                    "nav-item flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ease-in-out",
-                                    theme === 'dark' ? "text-gray-300 hover:bg-gray-700 hover:text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                                )}
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    handleItemClick('#contact')
-                                }}
-                            >
-                                <Mail size={18} />
-                                <span className="ml-2">Contact</span>
-                            </a>
                         </div>
                     </div>
                     <div className="flex items-center">
@@ -144,20 +130,7 @@ export default function Navbar({ theme, toggleTheme }) {
                         </a>
                     ))}
                     {/* Mobile Contact Button */}
-                    <a
-                        href="#contact"
-                        className={cn(
-                            "nav-item flex items-center px-3 py-2 rounded-md text-base font-medium",
-                            theme === 'dark' ? "text-gray-300 hover:bg-gray-700 hover:text-white" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                        )}
-                        onClick={(e) => {
-                            e.preventDefault()
-                            handleItemClick('#contact')
-                        }}
-                    >
-                        <Mail size={18} />
-                        <span className="ml-2">Contact</span>
-                    </a>
+                    
                 </div>
             </div>
         </nav>

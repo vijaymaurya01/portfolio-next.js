@@ -39,9 +39,9 @@ const BannerComponent = ({ theme }) => {
                         <div className="flex justify-between items-center">
                             <h1 className={`heading text-4xl sm:text-5xl lg:text-6xl font-bold ${headingClass}`}>
                                 Hello,<br />
-                                This is <span className="text-pink-600 dark:text-[#FF26B9]">{coder.name}</span>,<br />
+                                This is <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-green-500">{coder.name}</span>,<br />
                                 I&apos;m a Professional{' '}
-                                <span className="text-green-600 dark:text-[#00FF9D]">
+                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-pink-500">
                                     <TypewriterText text="Software Developer." />
                                 </span>
                             </h1>
