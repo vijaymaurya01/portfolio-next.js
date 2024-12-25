@@ -56,11 +56,18 @@ export default function Home() {
         <section id="about">
           <BannerComponent theme={theme} />
         </section>
-        <SkillsComponent theme={theme} />
-        <ExperienceComponent theme={theme} />
+        <section id="skills">
+          <SkillsComponent theme={theme} />
+        </section>
+        <section id="experience" >
 
+          <ExperienceComponent theme={theme} />
+        </section>
+
+        <section id="education">
 
         <EducationComponent theme={theme} />
+        </section>
 
         <section id="blogs" className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -70,7 +77,7 @@ export default function Home() {
 
         <section id="projects" className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold mb-8 text-center">Projects</h2>
+            <h2 className="text-4xl font-bold mb-8 text-center">Projects</h2>
             <div className="relative">
               <div className="flex overflow-hidden">
                 <ProjectCard theme={theme} />
@@ -78,9 +85,9 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="contact" className="py-16">
+        <section id="contact">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold mb-8 text-center">Contact Us</h2>
+           
             <div className="relative">
               <div className="flex overflow-hidden">
                 <ContactForm theme={theme} />
@@ -88,10 +95,10 @@ export default function Home() {
             </div>
           </div>
         </section>
-        
+
       </main>
       <footer>
-        <Footer theme={theme}/>
+        <Footer theme={theme} />
       </footer>
     </div>
   )

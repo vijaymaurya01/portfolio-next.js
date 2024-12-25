@@ -1,8 +1,5 @@
-'use client'
-
-import React, { useEffect, useState } from 'react'
-import { gsap } from 'gsap'
-import { Briefcase, Calendar, ExternalLink, ChevronDown } from 'lucide-react'
+import React, { useEffect, useState } from 'react';
+import { Briefcase, Calendar,   rnalLink, ChevronDown, Code, Globe, Server, Shield } from 'lucide-react';
 
 const experiences = [
     {
@@ -10,98 +7,136 @@ const experiences = [
         company: "Xenonstack Pvt Ltd",
         period: "2022 - Present",
         description: "Working as a Software Developer and Tester, contributing to both development and quality assurance for AI-driven solutions.",
+        icon: Code,
         projects: [
             {
                 name: "TYP",
+                icon: Globe,
                 description: "A platform similar to Ekart with advanced inventory and order management systems. Focused on optimizing the user experience and ensuring end-to-end testing.",
                 technologies: ["React", "Node.js", "MongoDB", "AWS"],
+                color: "from-blue-500 to-cyan-500"
             },
             {
                 name: "Computer Vision (AI Agent)",
+                icon: Shield,
                 description: "Developed an AI-based monitoring system to detect theft and abnormal activity in stores. Worked on both development and rigorous testing to ensure reliability.",
                 technologies: ["Python", "OpenCV", "TensorFlow", "AWS"],
+                color: "from-purple-500 to-pink-500"
             },
             {
                 name: "AWS News Recommendation",
+                icon: Server,
                 description: "An AI-powered news recommendation engine that delivers personalized news based on user interests. Contributed to system architecture and testing.",
                 technologies: ["Python", "AWS SageMaker", "React", "MongoDB"],
+                color: "from-green-500 to-emerald-500"
             },
         ],
     },
-]
+];
 
 const ExperienceComponent = () => {
-    const [activeProject, setActiveProject] = useState(null)
+    const [activeProject, setActiveProject] = useState(null);
+    const [visible, setVisible] = useState(false);
 
     useEffect(() => {
-        gsap.fromTo(
-            '.experience-card',
-            { opacity: 0, y: 50 },
-            { opacity: 1, y: 0, duration: 0.8, stagger: 0.3, ease: 'power3.out' }
-        )
-    }, [])
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setVisible(true);
+                }
+            },
+            { threshold: 0.1 }
+        );
 
-    const toggleProject = (projectName) => {
-        setActiveProject(activeProject === projectName ? null : projectName)
-    }
+        const section = document.querySelector('.experience-section');
+        if (section) observer.observe(section);
+
+        return () => observer.disconnect();
+    }, []);
 
     return (
-        <section id="experience" className="py-16 ">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-3xl font-bold mb-12 text-center text-gray-900 ">Professional Experience</h2>
+        <section className="experience-section py-16 bg-gradient-to-b ">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className={`text-center mb-16 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 mb-6">
+                        <Briefcase className="w-8 h-8 " />
+                    </div>
+                    <h2 className="text-4xl font-bold">Professional Journey</h2>
+                    <div className="mt-4 h-1 w-24 mx-auto bg-gradient-to-r from-green-500 to-emerald-500 rounded" />
+                </div>
+
                 <div className="space-y-8">
                     {experiences.map((exp, index) => (
-                        <div key={index} className="experience-card  rounded-lg shadow-lg overflow-hidden">
-                            <div className="p-6">
-                                <div className="flex items-center justify-between mb-4">
-                                    <div className="flex items-center space-x-2">
-                                        <Briefcase className="text-green-600 " size={24} />
-                                        <h3 className="text-xl font-semibold ">{exp.title}</h3>
+                        <div
+                            key={index}
+                            className={`transition-all duration-700 delay-300 ${
+                                visible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+                            }`}
+                        >
+                            <div className="mb-6 flex items-center">
+                                <div className="flex items-center space-x-4">
+                                    <div className="flex-shrink-0">
+                                        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center">
+                                            <exp.icon className="w-6 h-6 " />
+                                        </div>
                                     </div>
-                                    <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-green-800 dark:bg-green-900 dark:text-blue-200 rounded-full">
-                                        {exp.company}
-                                    </span>
+                                    <div>
+                                        <h3 className="text-2xl font-bold ">{exp.title}</h3>
+                                        <div className="flex items-center mt-2 ">
+                                            <Calendar className="w-4 h-4 mr-2" />
+                                            <span>{exp.period}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex items-center mb-4 text-pink-600 ">
-                                    <Calendar className="mr-2" size={18} />
-                                    <span>{exp.period}</span>
-                                </div>
-                                <p className="mb-6 ">{exp.description}</p>
-                                <div className="space-y-4">
-                                    <button
-                                        onClick={() => toggleProject('all')}
-                                        className="flex items-center justify-between w-full px-4 py-2 text-left   rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                                    >
-                                        <span className="font-medium">Key Projects</span>
-                                        <ChevronDown
-                                            className={`transform transition-transform ${activeProject === 'all' ? 'rotate-180' : ''
-                                                }`}
-                                            size={20}
-                                        />
-                                    </button>
-                                    {activeProject === 'all' && (
-                                        <div className="mt-4 space-y-4">
-                                            {exp.projects.map((project, pIndex) => (
-                                                <div key={pIndex} className=" rounded-lg p-4">
-                                                    <h4 className="text-lg font-medium mb-2 flex items-center ">
-                                                        <ExternalLink className="mr-2 text-green-600 dark:text-blue-400" size={16} />
-                                                        {project.name}
-                                                    </h4>
-                                                    <p className="text-sm  mb-3">{project.description}</p>
+                            </div>
+
+                            <div className=" rounded-2xl shadow-xl p-6 ml-6 relative">
+                                <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-green-500 to-emerald-500 rounded-l-2xl" />
+                                
+                                <p className=" mb-8">{exp.description}</p>
+
+                                <div className="space-y-6">
+                                    {exp.projects.map((project, pIndex) => (
+                                        <div
+                                            key={pIndex}
+                                            className={`bg-gradient-to-r ${project.color} p-[1px] rounded-xl transition-transform duration-300 hover:scale-[1.02] cursor-pointer`}
+                                            onClick={() => setActiveProject(activeProject === pIndex ? null : pIndex)}
+                                        >
+                                            <div className=" rounded-xl p-6">
+                                                <div className="flex items-start justify-between">
+                                                    <div className="flex items-center space-x-3">
+                                                        <project.icon className="w-6 h-6 " />
+                                                        <h4 className="text-lg font-semibold ">
+                                                            {project.name}
+                                                        </h4>
+                                                    </div>
+                                                    <ChevronDown
+                                                        className={`w-5 h-5 transform transition-transform ${
+                                                            activeProject === pIndex ? 'rotate-180' : ''
+                                                        }`}
+                                                    />
+                                                </div>
+
+                                                <div className={`mt-4 transition-all duration-300 ${
+                                                    activeProject === pIndex ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'
+                                                }`}>
+                                                    <p className=" mb-4">
+                                                        {project.description}
+                                                    </p>
                                                     <div className="flex flex-wrap gap-2">
                                                         {project.technologies.map((tech, tIndex) => (
                                                             <span
                                                                 key={tIndex}
-                                                                className="inline-block bg-green-200 dark:bg-green-700 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-200 mr-2 mb-2"
+                                                                className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full"
                                                             >
                                                                 {tech}
                                                             </span>
                                                         ))}
                                                     </div>
                                                 </div>
-                                            ))}
+                                            </div>
                                         </div>
-                                    )}
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -109,8 +144,7 @@ const ExperienceComponent = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default ExperienceComponent
-
+export default ExperienceComponent;
