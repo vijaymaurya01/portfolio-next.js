@@ -87,7 +87,7 @@ export default function BlogCard() {
                     <h1 className="text-4xl font-bold tracking-tight  sm:text-5xl">
                         Latest blog posts
                     </h1>
-                    <p className="text-lg text-gray-500 dark:text-gray-300">
+                    <p className="text-lg  ">
                         Blogs that are loved by the community. Updated every hour.
                     </p>
                 </div>
@@ -128,7 +128,7 @@ export default function BlogCard() {
                                     <h3 className="text-lg font-semibold mb-2   group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-200">
                                         {post.title}
                                     </h3>
-                                    <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                                    <p className="text-sm  line-clamp-2">
                                         {post.desc}
                                     </p>
                                 </div>
