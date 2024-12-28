@@ -75,7 +75,7 @@ const ContactUsComponent = ({ theme = 'light' }) => {
 
     return (
         <section className={`py-16 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <div className="inline-block mb-4">
                         <MessageCircle
@@ -91,7 +91,7 @@ const ContactUsComponent = ({ theme = 'light' }) => {
                     />
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                     {/* Contact Information */}
                     <div className="space-y-8">
                         {contactDetails.map((detail, index) => {
@@ -123,8 +123,8 @@ const ContactUsComponent = ({ theme = 'light' }) => {
                     </div>
 
                     {/* Contact Form */}
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <form onSubmit={handleSubmit} className="space-y-6 ml-auto">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             {['firstName', 'lastName'].map((field) => (
                                 <div
                                     key={field}

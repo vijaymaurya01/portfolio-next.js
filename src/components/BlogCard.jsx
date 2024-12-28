@@ -25,7 +25,7 @@ const posts = [
         href: "javascript:void(0)",
         category: "Tools"
     },
-    {
+    { 
         title: "How to Use Root C++ Interpreter Shell",
         desc: "The powerful gravity waves resulting from the impact of the planets' moons — four in total — were finally resolved in 2015.",
         img: "https://images.unsplash.com/photo-1648393847044-0f31992a9ea2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -125,7 +125,7 @@ export default function BlogCard() {
                                             {post.date}
                                         </span>
                                     </div>
-                                    <h3 className="text-lg font-semibold mb-2   group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors duration-200">
+                                    <h3 className="text-lg font-semibold mb-2  text-green-800 group-hover:text-green-600 transition-colors duration-200">
                                         {post.title}
                                     </h3>
                                     <p className="text-sm  line-clamp-2">
