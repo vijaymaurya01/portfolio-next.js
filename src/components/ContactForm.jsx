@@ -83,9 +83,10 @@ const ContactUsComponent = ({ theme = 'light' }) => {
                             className={`${isDark ? 'text-green-400' : 'text-green-600'} animate-bounce`}
                         />
                     </div>
-                    <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <h2 className={`text-4xl mb-4 font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                         Get in Touch
                     </h2>
+                    <p>We'd love to hear from you! Whether you have a question, feedback, or just want to say hello, feel free to reach out to us.</p>
                     <div
                         className={`mt-4 h-1 w-24 mx-auto rounded ${isDark ? 'bg-pink-500' : 'bg-green-500'}`}
                     />
