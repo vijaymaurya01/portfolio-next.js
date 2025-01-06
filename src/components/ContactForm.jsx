@@ -74,7 +74,7 @@ const ContactUsComponent = ({ theme = 'light' }) => {
     };
 
     return (
-        <section className={`py-16 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <section className={`p-16 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <div className="inline-block mb-4">

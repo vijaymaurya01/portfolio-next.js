@@ -47,10 +47,10 @@ const BannerComponent = ({ theme }) => {
                             </h1>
                         </div>
                         <div className="flex gap-4">
-                            <a href="#" className="social-icon hover:text-green-600 dark:hover:text-[#00FF9D] transition-colors">
+                            <a href="https://github.com/vijaymaurya01" className="social-icon hover:text-green-600 dark:hover:text-[#00FF9D] transition-colors">
                                 <Github size={24} />
                             </a>
-                            <a href="#" className="social-icon hover:text-green-600 dark:hover:text-[#00FF9D] transition-colors">
+                            <a href="https://in.linkedin.com/in/vijay-kumar-maurya-51a292213?trk=people-guest_people_search-card" className="social-icon hover:text-green-600 dark:hover:text-[#00FF9D] transition-colors">
                                 <Linkedin size={24} />
                             </a>
                             <a href="#" className="social-icon hover:text-green-600 dark:hover:text-[#00FF9D] transition-colors">
