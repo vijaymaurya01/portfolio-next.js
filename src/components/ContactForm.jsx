@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MapPin, Phone, Mail, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, MessageCircle, Send } from 'lucide-react';
 
 const contactDetails = [
     {
@@ -21,7 +21,8 @@ const contactDetails = [
 
 const ContactUsComponent = ({ theme = 'light' }) => {
     const [focusedField, setFocusedField] = useState(null);
-    const [status, setStatus] = useState('idle'); // idle, submitting, success
+    const [status, setStatus] = useState('idle');
+    const [isVisible, setIsVisible] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -37,14 +38,15 @@ const ContactUsComponent = ({ theme = 'light' }) => {
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-slide-in');
+                        setIsVisible(true);
                     }
                 });
             },
-            { threshold: 0.2 }
+            { threshold: 0.1 }
         );
 
-        document.querySelectorAll('.contact-card').forEach((card) => observer.observe(card));
+        const section = document.querySelector('.contact-section');
+        if (section) observer.observe(section);
 
         return () => observer.disconnect();
     }, []);
@@ -57,13 +59,9 @@ const ContactUsComponent = ({ theme = 'light' }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('submitting');
-
-        // Simulate API call
         await new Promise((resolve) => setTimeout(resolve, 1500));
-
         setStatus('success');
         setTimeout(() => setStatus('idle'), 3000);
-
         setFormData({
             firstName: '',
             lastName: '',
@@ -74,39 +72,54 @@ const ContactUsComponent = ({ theme = 'light' }) => {
     };
 
     return (
-        <section className={`py-16 ${isDark ? 'bg-gray-900' : 'bg-gray-50'}`}>
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
-                    <div className="inline-block mb-4">
+        <section 
+            className={`contact-section p-4 sm:p-8 md:p-16 ${isDark ? 'bg-gray-900' : 'bg-gray-50'} 
+                transition-all duration-500 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
+            <div className="max-w-7xl mx-auto">
+                {/* Header */}
+                <div className="text-center mb-8 md:mb-16 animate-fade-in">
+                    <div className="inline-block mb-4 transform hover:scale-110 transition-transform duration-300">
                         <MessageCircle
                             size={48}
-                            className={`${isDark ? 'text-green-400' : 'text-green-600'} animate-bounce`}
+                            className={`${isDark ? 'text-green-400' : 'text-green-600'} hover:rotate-12 transition-all duration-300`}
                         />
                     </div>
-                    <h2 className={`text-4xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                    <h2 className={`text-3xl md:text-4xl mb-4 font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>
                         Get in Touch
                     </h2>
-                    <div
-                        className={`mt-4 h-1 w-24 mx-auto rounded ${isDark ? 'bg-pink-500' : 'bg-green-500'}`}
+                    <p className={`max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+                        We'd love to hear from you! Whether you have a question, feedback, or just want to say hello.
+                    </p>
+                    <div className={`mt-4 h-1 w-24 mx-auto rounded transition-all duration-300 hover:w-32 
+                        ${isDark ? 'bg-pink-500' : 'bg-green-500'}`} 
                     />
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                    {/* Contact Information */}
-                    <div className="space-y-8">
+                {/* Content Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                    {/* Contact Cards */}
+                    <div className="space-y-6">
                         {contactDetails.map((detail, index) => {
                             const Icon = detail.icon;
                             return (
                                 <div
                                     key={index}
-                                    className={`contact-card p-6 rounded-xl shadow-lg backdrop-blur-sm
-                                    ${isDark ? 'bg-gray-800/90 border-pink-500/20' : 'bg-white border-green-500/20'}
-                                    hover:border-opacity-100 transition-all duration-300 border-2 animate-opacity`}
+                                    className={`group p-6 rounded-xl shadow-lg backdrop-blur-sm
+                                        ${isDark ? 'bg-gray-800/90' : 'bg-white'} 
+                                        hover:scale-105 transition-all duration-300
+                                        border-2 ${isDark ? 'border-pink-500/20' : 'border-green-500/20'}
+                                        hover:border-opacity-100`}
+                                    style={{
+                                        animationDelay: `${index * 200}ms`,
+                                        animation: 'slideIn 0.6s ease-out forwards'
+                                    }}
                                 >
                                     <div className="flex items-center space-x-4">
                                         <Icon
                                             size={32}
-                                            className={`${isDark ? 'text-pink-400' : 'text-green-500'}`}
+                                            className={`${isDark ? 'text-pink-400' : 'text-green-500'} 
+                                                group-hover:rotate-12 transition-transform duration-300`}
                                         />
                                         <div>
                                             <p className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>
@@ -122,15 +135,11 @@ const ContactUsComponent = ({ theme = 'light' }) => {
                         })}
                     </div>
 
-                    {/* Contact Form */}
-                    <form onSubmit={handleSubmit} className="space-y-6 ml-auto">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {/* Form */}
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                             {['firstName', 'lastName'].map((field) => (
-                                <div
-                                    key={field}
-                                    className={`transform transition-all duration-300 ${focusedField === field ? 'scale-[1.02]' : ''
-                                        }`}
-                                >
+                                <div key={field} className="transform transition-all duration-300">
                                     <input
                                         type="text"
                                         name={field}
@@ -140,85 +149,70 @@ const ContactUsComponent = ({ theme = 'light' }) => {
                                         required
                                         onFocus={() => setFocusedField(field)}
                                         onBlur={() => setFocusedField(null)}
-                                        className={`${isDark ? 'bg-slate-600 border-pink-500/20' : 'bg-white border-green-300'} selection:w-full px-4 py-3 rounded-lg border  focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all duration-300`}
+                                        className={`w-full px-4 py-3 rounded-lg transition-all duration-300
+                                            ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}
+                                            border-2 ${isDark ? 'border-pink-500/20' : 'border-green-500/20'}
+                                            focus:ring-2 focus:ring-offset-2 
+                                            ${isDark ? 'focus:ring-pink-500' : 'focus:ring-green-500'}
+                                            ${focusedField === field ? 'scale-105' : ''}`}
                                     />
                                 </div>
                             ))}
                         </div>
 
                         {['email', 'phone'].map((field) => (
-                            <div
+                            <input
                                 key={field}
-                                className={`transform transition-all duration-300 ${focusedField === field ? 'scale-[1.02]' : ''
-                                    }`}
-                            >
-                                <input
-                                    type={field === 'email' ? 'email' : 'tel'}
-                                    name={field}
-                                    value={formData[field]}
-                                    onChange={handleChange}
-                                    placeholder={field === 'email' ? 'Email' : 'Phone number'}
-                                    required={field === 'email'}
-                                    onFocus={() => setFocusedField(field)}
-                                    onBlur={() => setFocusedField(null)}
-                                    className={`${isDark ? 'bg-slate-600 border-pink-500/20' : 'bg-white border-green-300'} w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all duration-300`}
-                                />
-                            </div>
+                                type={field === 'email' ? 'email' : 'tel'}
+                                name={field}
+                                value={formData[field]}
+                                onChange={handleChange}
+                                placeholder={field === 'email' ? 'Email' : 'Phone number'}
+                                required={field === 'email'}
+                                className={`w-full px-4 py-3 rounded-lg transition-all duration-300
+                                    ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}
+                                    border-2 ${isDark ? 'border-pink-500/20' : 'border-green-500/20'}
+                                    focus:ring-2 focus:ring-offset-2
+                                    ${isDark ? 'focus:ring-pink-500' : 'focus:ring-green-500'}`}
+                            />
                         ))}
 
-                        <div
-                            className={`transform transition-all duration-300 ${focusedField === 'message' ? 'scale-[1.02]' : ''
-                                }`}
-                        >
-                            <textarea
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                placeholder="Your Message"
-                                required
-                                onFocus={() => setFocusedField('message')}
-                                onBlur={() => setFocusedField(null)}
-                                className={`${isDark ? 'bg-slate-600 border-pink-500/20' : 'bg-white border-green-300'} w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all duration-300 min-h-[120px]`}
-                            />
-                        </div>
+                        <textarea
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
+                            placeholder="Your Message"
+                            required
+                            className={`w-full px-4 py-3 rounded-lg min-h-[120px] transition-all duration-300
+                                ${isDark ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'}
+                                border-2 ${isDark ? 'border-pink-500/20' : 'border-green-500/20'}
+                                focus:ring-2 focus:ring-offset-2
+                                ${isDark ? 'focus:ring-pink-500' : 'focus:ring-green-500'}`}
+                        />
 
                         <button
                             type="submit"
                             disabled={status === 'submitting'}
-                            className={`w-full py-3 px-6 rounded-lg font-semibold  transition-all duration-300
+                            className={`w-full py-3 px-6 rounded-lg font-semibold text-white
+                                flex items-center justify-center space-x-2
+                                transition-all duration-300 transform hover:scale-105
                                 ${status === 'submitting'
-                                    ? 'bg-green-400 cursor-not-allowed'
-                                    : 'bg-green-600 hover:bg-green-700 active:scale-95'
-                                }
-                            `}
+                                    ? 'bg-gray-400 cursor-not-allowed'
+                                    : `${isDark ? 'bg-pink-600 hover:bg-pink-700' : 'bg-green-600 hover:bg-green-700'}`
+                                } active:scale-95`}
                         >
-                            {status === 'submitting' ? 'Sending...' : 'Send Message'}
+                            <span>{status === 'submitting' ? 'Sending...' : 'Send Message'}</span>
+                            <Send size={20} className={`ml-2 ${status === 'submitting' ? 'animate-bounce' : 'animate-none'}`} />
                         </button>
 
                         {status === 'success' && (
-                            <div className=" border-l-4 border-green-500 p-4 animate-fade-in">
-                                <p className="text-green-700">Thank you! Your message has been sent successfully.</p>
+                            <div className="border-l-4 border-green-500 p-4 bg-green-50 text-green-700 rounded animate-fade-in">
+                                Thank you! Your message has been sent successfully.
                             </div>
                         )}
                     </form>
                 </div>
             </div>
-
-            <style jsx>{`
-                @keyframes slide-in {
-                    0% {
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-                .animate-slide-in {
-                    animation: slide-in 0.6s ease-out forwards;
-                }
-            `}</style>
         </section>
     );
 };
