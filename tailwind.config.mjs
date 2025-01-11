@@ -12,6 +12,10 @@ export default {
         foreground: "var(--foreground)",
       },
     },
+    fontFamily: {
+      display: ["Satisfy", "cursive"],
+      // logo: ["Monsieur La Doulaise", "cursive"],
+    },
   },
   plugins: [],
 };
